@@ -10,10 +10,10 @@ Deep learning has proven highly effective in extracting hierarchical features fr
 
 | Model              | Task                                  | Data  | Notes                                    |
 | ------------------ | ------------------------------------- | ----- | ---------------------------------------- |
-| TreeFormer         | Tree counting (density estimation)    | RGB   | Good treatment of dense forests, semi- supervised, no need for BBox. No sup- port for species classification or anoma- lies      |
+| [TreeFormer](https://arxiv.org/abs/2307.06118)      | Tree counting (density estimation)    | RGB   | Good treatment of dense forests, semi- supervised, no need for BBox. No sup- port for species classification or anoma- lies      |
 | ATFENet            | Tree segmentation and counting        | RGB   | Lightweight, real-time running on UAV, integrated photo stitching pipeline. Re- duced performance in complex canopy forests (Acacia)         |
 | YOLOv5 (CHM-based) | Tree detection                        | CHM   | Fast, suitable for real-time UAV deploy- ment, taking advantage of tree canopy height. Loss of 3D detail, easy to distort on steep terrain        |
-| ForAINet           | 3D semantic and instance segmentation | LiDAR | Keep 3D information intact, accu- rately measure plant biological at- tributes. Consuming computational re- sources, requiring large 3D label data |
+| [ForAINet](https://www.sciencedirect.com/science/article/pii/S0034425724000890)           | 3D semantic and instance segmentation | LiDAR | Keep 3D information intact, accu- rately measure plant biological at- tributes. Consuming computational re- sources, requiring large 3D label data |
 | Point-wise Net     | Point-supervised segmentation         | RGB   | Reduce labeling costs, match big data. Difficult to separate overlapping trees, low border accuracy                      |
 
 

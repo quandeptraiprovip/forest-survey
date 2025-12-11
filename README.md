@@ -11,10 +11,10 @@ Deep learning has proven highly effective in extracting hierarchical features fr
 | Model              | Task                                  | Data  | Notes                                    |
 | ------------------ | ------------------------------------- | ----- | ---------------------------------------- |
 | [TreeFormer](https://arxiv.org/abs/2307.06118)      | Tree counting (density estimation)    | RGB   | Good treatment of dense forests, semi- supervised, no need for BBox. No sup- port for species classification or anoma- lies      |
-| ATFENet            | Tree segmentation and counting        | RGB   | Lightweight, real-time running on UAV, integrated photo stitching pipeline. Re- duced performance in complex canopy forests (Acacia)         |
-| YOLOv5 (CHM-based) | Tree detection                        | CHM   | Fast, suitable for real-time UAV deploy- ment, taking advantage of tree canopy height. Loss of 3D detail, easy to distort on steep terrain        |
+| [ATFENet](https://doi.org/10.3390/rs14164113)            | Tree segmentation and counting        | RGB   | Lightweight, real-time running on UAV, integrated photo stitching pipeline. Re- duced performance in complex canopy forests (Acacia)         |
+| [YOLOv5 (CHM-based)](https://doi.org/10.1016/j.ophoto.2023.100045) | Tree detection                        | CHM   | Fast, suitable for real-time UAV deploy- ment, taking advantage of tree canopy height. Loss of 3D detail, easy to distort on steep terrain        |
 | [ForAINet](https://www.sciencedirect.com/science/article/pii/S0034425724000890)           | 3D semantic and instance segmentation | LiDAR | Keep 3D information intact, accu- rately measure plant biological at- tributes. Consuming computational re- sources, requiring large 3D label data |
-| Point-wise Net     | Point-supervised segmentation         | RGB   | Reduce labeling costs, match big data. Difficult to separate overlapping trees, low border accuracy                      |
+| [Point-wise Net](https://doi.org/10.1016/j.engappai.2021.104172)     | Point-supervised segmentation         | RGB   | Reduce labeling costs, match big data. Difficult to separate overlapping trees, low border accuracy                      |
 
 
 ## Datasets
@@ -28,28 +28,63 @@ The following datasets were used in the experiments:
 ## Taxonomy of Approches
 
 We categorize deep learning methods into three tasks:
-1. Individual Tree Detection  
-2. Tree Species Classification  
-3. Forest Anomaly Detection  
+
+**1. Individual Tree Detection:** 
+    - Object detection models used to locate individual tree crowns in UAV imagery.
+    - Common challenges: overlapping canopies, variable illumination, dense forests, and scale variation across UAV altitudes.  
+**2. Tree Species Classification:**
+    - CNN and Transformer architectures classify tree species from canopy patches or hyperspectral/multispectral imagery.
+    - Often requires domain generalization methods due to species appearance changes across regions, seasons, and sensor conditions.
+**3. Forest Anomaly Detection: **
+    - Detects disease, defoliation, forest fire damage, or illegal logging using RGB, thermal, or multispectral data.  
+    - Typically constrained by limited anomalous samples → semi-supervised and one-class methods are common.
 
 And three data modalities:
-- RGB imagery
-- LiDAR point clouds
+- RGB imagery:
+  - Most widely used due to low cost and accessibility.
+  - Supports detection, segmentation, and basic classification tasks.
+  - Limitations: lacks structural depth → limited accuracy for tree height or biomass estimation.
+- LiDAR point clouds:
+  - Provides accurate canopy height models (CHM) and 3D structure for tree segmentation and volume estimation.
+  - Requires specialized point-based neural networks (PointNet, ForAINet) to process irregular 3D data.
+  - High cost and limited availability restrict dataset scale.
 - Multimodal fusion
 
 ## Network Architectures
 
-- 2D CNN-based: YOLOv5, Faster R-CNN
-- Transformer-based: TreeFormer
-- 3D Point-based: ForAINet
-- Attention-based Lightweight Models: ATFENet
+- 2D CNN-based:
+  - YOLOv5: fast realtime detection for tree counting.
+  - Faster R-CNN: higher accuracy.
+  - U-Net: widely used for canopy/crown segmentation.
+- Transformer-based:
+  - Global attention enables long-range canopy structure understanding.
+  - TreeFormer
+- 3D Point-based:
+  - Operate on LiDAR point clouds or SfM-generated point sets.
+  - ForAINet: tailored for forest point cloud annotation and inventory tasks.
+  - Models capture 3D geometry → suitable for height/volume estimation.
+- Attention-based Lightweight Models:
+  - Optimized for onboard UAV inference with limited computation.
+  - ATFENet:
+  - Essential for field deployment and real-time monitoring.
 
 ## Training Strategies
 
-- Data augmentation (2D & 3D)
-- Semi-supervised learning
-- Domain adaptation
-- UAV mosaicking pipeline
+- Data augmentation (2D & 3D):
+  - Rotation, flipping, color jitter, illumination simulation for RGB.
+  - Random downsampling, noise injection, point jittering for LiDAR.  
+- Semi-supervised learning:
+  - Pseudo-labeling on large unlabeled UAV datasets.
+  - Consistency regularization for spectral and spatial invariance.
+  - Key when annotation cost is prohibitive.
+- Domain adaptation:
+  - Important for cross-region generalization (e.g., tropical vs temperate forests).
+  - Techniques include adversarial domain alignment and feature normalization.
+  - Helps models trained in one forest type adapt to another.
+- UAV mosaicking pipeline:
+  - Orthomosaic creation through Structure-from-Motion (SfM).
+  - Produces DSM/DTM, canopy height models, and stitched imagery.
+  - Critical preprocessing step for both RGB and LiDAR workflows.
 
 
 ## Result

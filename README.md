@@ -23,19 +23,20 @@ The following datasets were used in the experiments:
 - Acacia (RGB)
 - OilPalm (RGB)
 - KCL-London (RGB) — [Source](https://drive.google.com/file/d/1xcjv8967VvvzcDM4aqAi7Corkb11T0i2/view)
+- Yosemite - [Source](https://drive.google.com/drive/folders/1NWAqslICPoTS8OvT8zosI0R7cmsl6x9j)
 - Jiangsu (RGB)
 
 ## Taxonomy of Approches
 
 We categorize deep learning methods into three tasks:
 
-**1. Individual Tree Detection:** 
+- **1. Individual Tree Detection:** 
     - Object detection models used to locate individual tree crowns in UAV imagery.
     - Common challenges: overlapping canopies, variable illumination, dense forests, and scale variation across UAV altitudes.  
-**2. Tree Species Classification:**
+- **2. Tree Species Classification:**
     - CNN and Transformer architectures classify tree species from canopy patches or hyperspectral/multispectral imagery.
     - Often requires domain generalization methods due to species appearance changes across regions, seasons, and sensor conditions.
-**3. Forest Anomaly Detection: **
+- **3. Forest Anomaly Detection: **
     - Detects disease, defoliation, forest fire damage, or illegal logging using RGB, thermal, or multispectral data.  
     - Typically constrained by limited anomalous samples → semi-supervised and one-class methods are common.
 

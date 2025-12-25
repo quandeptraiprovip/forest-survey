@@ -89,3 +89,29 @@ And three data modalities:
 
 
 ## Result
+
+## Challenges
+
+- Lack of large-scale, standardized benchmark datasets
+- High annotation cost (bounding boxes, instance masks, LiDAR labeling)
+- Poor generalization across forest types, regions, and seasons
+- Severe class imbalance, especially for rare species and anomalies
+- Dense and overlapping canopies causing detection ambiguity
+- Limited availability of multimodal data (RGB, LiDAR, hyperspectral, thermal)
+- Domain shift due to illumination, terrain, sensor, and acquisition differences
+- High computational cost of 3D point-based models
+- Limited real-time capability for onboard UAV deployment
+- Inconsistent evaluation protocols and metrics across studies
+
+## Future Directions
+
+Development of foundation models for large-scale forest monitoring
+Self-supervised and semi-supervised learning to reduce labeling requirements
+Multimodal fusion (RGB + LiDAR + hyperspectral + thermal)
+Domain adaptation and cross-region generalization techniques
+Lightweight and efficient models for real-time UAV onboard inference
+Density-based and transformer-based methods for dense forest scenarios
+Large-scale, publicly available benchmark datasets with unified protocols
+Improved anomaly detection methods for early stress, disease, and wildfire detection
+Integration of temporal data for change detection and long-term monitoring
+End-to-end UAV pipelines combining perception, mapping, and decision-making
